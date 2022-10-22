@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
+    <script src="code.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>lab1</title>
+</head>
+<body>
+    Arkadiusz Remplewicz 249106
+    <h1>Lab1</h1>
+    <form>
+        <label for="email">E-mail:</label>
+        <input type="email" placeholder="example@mail.com" required><br>
+        <label for="postal">Postal code:</label>
+        <input id="postal" placeholder="00-000" required pattern="^\d{2}-\d{3}$"><br>
+        <label for="nip">NIP:</label>
+        <input id="nip" placeholder="1234567890" required pattern="\d{10}"><br>
+        <label for="idendity">ID number:</label> 
+        <!-- TODO Suma kontrolna? -->
+        <input id="identity" placeholder="ABC123456" required pattern="^\w{3}\d{6}$"><br>
+        <label for="ipv4">IPv4 Address:</label>
+        <input id="ipv4" placeholder="192.0.0.001" pattern="^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$" required><br>
+        <label for="www">WWW:</label>
+        <input id="www" placeholder="http://example.com" type="url" required><br>
+        <label for="path1">System path:</label>
+        <input id="path1" placeholder="C:\windows\temp" pattern="^([a-zA-Z]:\\windows|winnt|win|dos|msdos)(\\[a-z0-9]+)*$" required><br>
+        <label for="path2">System path (allow uppercase):</label>
+        <input id="path2" placeholder="C:\WinDows\temp" required pattern="(?i)^([a-zA-Z]:\\windows|winnt|win|dos|msdos)(\\[a-z0-9]+)*$"><br>
+        <label for="path3">Path in etc:</label>
+        <input id="path3" placeholder="/etc/passwd" pattern="^\/etc[\/][a-zA-Z0-9]+$" required><br>
+        <label for="ipv6">IPv6 Address:</label>
+        <input id="ipv6" placeholder="2001:0db8:85a3:0000:0000:8a2e:0370:7334" 
+        pattern="^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$" 
+        required><br>
+        <label for="telephone">Phone Number:</label>
+        <input id="telephone" placeholder="123456789" type="tel" required><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
