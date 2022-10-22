@@ -26,7 +26,7 @@
         <label for="www">WWW:</label>
         <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
         <label for="path1">System path:</label>
-        <input id="path1" placeholder="C:\windows\temp" pattern="^([a-zA-Z]:\\windows|winnt|win|dos|msdos)(\\[a-z0-9]+)*$" required><br>
+        <input id="path1" placeholder="C:\windows\temp" pattern="^([a-zA-Z]:\\(windows|winnt|win|dos|msdos))(\\[a-z0-9]+)*$" required><br>
         <label for="path2">System path (allow uppercase):</label>
         <input id="path2" placeholder="C:\WinDows\temp" required pattern="(?i)^([a-zA-Z]:\\windows|winnt|win|dos|msdos)(\\[a-z0-9]+)*$"><br>
         <label for="path3">Path in etc:</label>
