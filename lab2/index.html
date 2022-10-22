@@ -40,19 +40,19 @@
         <p>-------</p>
         <label for="first-date">Pick date:</label>
 
-        <input type="date" id="first-date" name="first-date"><br>
+        <input type="date" id="first-date" name="first-date" required><br>
 
         <label for="weekday-date">Pick date:</label>
 
-        <input type="date" min="2022-10-17" max="2022-10-21" id="weekday-date" name="weekday-date"><br>
+        <input type="date" min="2022-10-17" max="2022-10-21" id="weekday-date" name="weekday-date" required><br>
 
         <label for="12-time">Pick time a):</label>
 
-        <input type="time" min="00:00" max="12:00" id="12-time" name="12-time"><br>
+        <input type="time" min="00:00" max="12:00" id="12-time" name="12-time" required><br>
 
         <label for="24-time">Pick time b):</label>
 
-        <input type="time" id="24-time" name="24-time"><br>
+        <input type="time" id="24-time" name="24-time" required><br>
 
         <label for="color">Pick color:</label>
 
@@ -61,6 +61,17 @@
         <input type="submit" value="Submit">
     </form>
 </body>
+
+<script>
+
+const colorPicker = document.querySelector('#color');
+
+colorPicker.addEventListener('change', (event) => {
+    document.body.style.backgroundColor = colorPicker.value;
+});
+
+</script>
+
 </html>
 
 <!-- 
