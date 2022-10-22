@@ -24,7 +24,7 @@
         <label for="ipv4">IPv4 Address:</label>
         <input id="ipv4" placeholder="192.0.0.001" pattern="^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$" required><br>
         <label for="www">WWW:</label>
-        <input id="www" placeholder="http://example.com" type="url" required><br>
+        <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
         <label for="path1">System path:</label>
         <input id="path1" placeholder="C:\windows\temp" pattern="^([a-zA-Z]:\\windows|winnt|win|dos|msdos)(\\[a-z0-9]+)*$" required><br>
         <label for="path2">System path (allow uppercase):</label>
@@ -69,6 +69,15 @@ const colorPicker = document.querySelector('#color');
 colorPicker.addEventListener('change', (event) => {
     document.body.style.backgroundColor = colorPicker.value;
 });
+
+function checkURL (abc) {
+    var string = abc.value;
+    if (!~string.indexOf("http")) {
+        string = "http://" + string;
+    }
+    abc.value = string;
+    return abc
+}
 
 </script>
 
