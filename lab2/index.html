@@ -13,7 +13,7 @@
     <h1>Lab2</h1>
     <form>
         <label for="email">E-mail:</label>
-        <input type="email" placeholder="example@mail.com" required><br>
+        <input id="email" type="email" placeholder="example@mail.com" required><br>
         <label for="postal">Postal code:</label>
         <input id="postal" placeholder="00-000" required pattern="^\d{2}-\d{3}$"><br>
         <label for="nip">NIP:</label>
@@ -46,13 +46,13 @@
 
         <input type="date" min="2022-10-17" max="2022-10-21" id="weekday-date" name="weekday-date" required><br>
 
-        <label for="12-time">Pick time a):</label>
+        <label for="timehalf">Pick time a):</label>
 
-        <input type="time" min="00:00" max="12:00" id="12-time" name="12-time" required><br>
+        <input type="time" min="00:00" max="12:00" id="timehalf" name="timehalf" required><br>
 
-        <label for="24-time">Pick time b):</label>
+        <label for="timefull">Pick time b):</label>
 
-        <input type="time" id="24-time" name="24-time" required><br>
+        <input type="time" id="timefull" name="timefull" required><br>
 
         <label for="color">Pick color:</label>
 
@@ -60,6 +60,8 @@
 
         <input type="submit" value="Submit">
     </form>
+
+    <button onclick="randomData()">Random</button>
 </body>
 
 <script>
@@ -77,6 +79,25 @@ function checkURL (abc) {
     }
     abc.value = string;
     return abc
+}
+
+function randomData() {
+    document.querySelector('#email').value = "224413@edu.p.lodz.pl"
+    document.querySelector('#postal').value = "11-213"
+    document.querySelector('#nip').value = "0987654321"
+    document.querySelector('#identity').value = "XXX321333"
+    document.querySelector('#ipv4').value = "192.0.0.1"
+    document.querySelector('#www').value = "http://www.google.com"
+    document.querySelector('#ipv6').value = "2001:0db8:85a3:0000:0000:8a2e:0370:7334" 
+    document.querySelector('#path1').value= "C:\\windows\\temp";
+    document.querySelector('#path2').value= "C:\\winDows\\temp";
+    document.querySelector('#path3').value= "/etc/passwd";
+    document.querySelector('#telephone').value= "421512532";
+    document.querySelector('#first-date').value= "2022-10-22";
+    document.querySelector('#weekday-date').value= "2022-10-20";
+    document.querySelector('#timehalf').value= "09:00";
+    document.querySelector('#timefull').value= "15:00";
+    document.querySelector('#color').value= "#653214";
 }
 
 </script>
