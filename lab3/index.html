@@ -12,15 +12,57 @@
 <body>
     Arkadiusz Remplewicz 249106
     <h1>Lab3</h1>
-    <ol class="draggable-list">
-        <li><input type="text" draggable="true" value="Biały"></li>
-        <li><input type="text" draggable="true" value="Czerwony"></li>
-        <li><input type="text" draggable="true" value="Niebieski"></li>
-        <li><input type="text" draggable="true" value="Zielony"></li>
-        <li><input type="text" draggable="true" value="Czarny"></li>
+    <ol>
+        <li id="0" class="draggable-element" draggable="true"><input type="text" value="Biały"></li>
+        <li id="1" class="draggable-element" draggable="true"><input type="text" value="Czerwony"></li>
+        <li id="2" class="draggable-element" draggable="true"><input type="text" value="Niebieski"></li>
+        <li id="3" class="draggable-element" draggable="true"><input type="text" value="Zielony"></li>
+        <li id="4" class="draggable-element" draggable="true"><input type="text" value="Czarny"></li>
     </ol>
 </body>
 
+<script>
+    let dragged;
+    let draggedId;
+    let draggedIndex;
+    let targetIndex;
+    let list;
+
+    document.addEventListener("dragstart", ({ target }) => {
+        dragged = target;
+        draggedId = target.id;
+        list = target.parentNode.children;
+        for (let i = 0; i < list.length; i += 1) {
+            if (list[i] === dragged) {
+                draggedIndex = i;
+            }
+        }
+    });
+
+    document.addEventListener("dragover", (event) => {
+        event.preventDefault();
+    });
+
+    document.addEventListener("drop", ({ target }) => {
+        if (target.tagName == "INPUT") {
+            target = target.parentNode
+        }
+        if (target.className == "draggable-element" && target.id !== draggedId) {
+            dragged.remove(dragged);
+            for (let i = 0; i < list.length; i += 1) {
+                if (list[i] === target) {
+                    targetIndex = i;
+                }
+            }
+            if (draggedIndex > targetIndex) {
+                target.before(dragged);
+            } else {
+                target.after(dragged);
+            }
+        }
+    });
+
+</script>
 
 </html>
 <!-- 
