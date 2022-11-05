@@ -21,7 +21,6 @@
     overflow: hidden;
 }
 .button{
-    
     border: solid 1px purple;
     height: 20vh;
     min-width: 200px;
@@ -31,4 +30,6 @@
     background-color: aquamarine;
     width: 100px;
     height: 100px;
+    position: absolute;
+    border: solid 2px black;
 }
