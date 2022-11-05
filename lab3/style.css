@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.list-pane{
+    border: solid 1px red;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30%;
+}
+.blocks{
+    display: inline-block;
+    vertical-align: middle;
+    width: 69%;
+}
+.platform{
+    border: solid 1px blue;
+    height: 80vh;
+    min-width: 200px;
+    min-height: 350px;
+}
+.button{
+    
+    border: solid 1px purple;
+    height: 20vh;
+    min-width: 200px;
+    min-height: 150px;
+}
