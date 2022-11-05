@@ -86,18 +86,15 @@
         e = e || window.event;
         e.preventDefault();
         draggedBlock = e.srcElement
-        // get the mouse cursor position at startup:
         pos3 = e.clientX;
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
-        // call a function whenever the cursor moves:
         document.onmousemove = elementDrag;
     }
 
     function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
-        // calculate the new cursor position:
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
@@ -107,9 +104,7 @@
         var offsets = platform.getBoundingClientRect();
         var blockOffsets = draggedBlock.getBoundingClientRect();
 
-        // console.log(blockOffsets.bottom, of)
         if (blockOffsets.bottom <= offsets.bottom) {
-            // set the element's new position:
             draggedBlock.style.top = (draggedBlock.offsetTop - pos2) + "px";
             draggedBlock.style.left = (draggedBlock.offsetLeft - pos1) + "px";
         } else {
@@ -118,7 +113,6 @@
     }
 
     function closeDragElement() {
-        // stop moving when mouse button is released:
         document.onmouseup = null;
         document.onmousemove = null;
     }
