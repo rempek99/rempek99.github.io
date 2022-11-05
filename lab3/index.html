@@ -23,11 +23,11 @@
             </ol>
         </div>
         <div class="blocks">
-            <div class="platform">
+            <div class="platform" id="platformid">
 
             </div>
-            <div class="button">
-
+            <div class="button" onclick="blockGenerate()">
+                Generuj klocek
             </div>
         </div>
     </div>
@@ -73,6 +73,15 @@
             }
         }
     });
+
+    function blockGenerate(){
+        let platform = document.getElementById('platformid');
+        let block = document.createElement("div");
+        block.classList.add('block')
+        platform.append(block)
+    }
+
+
 
 </script>
 

@@ -18,6 +18,7 @@
     height: 80vh;
     min-width: 200px;
     min-height: 350px;
+    overflow: hidden;
 }
 .button{
     
@@ -25,4 +26,9 @@
     height: 20vh;
     min-width: 200px;
     min-height: 150px;
+}
+.block{
+    background-color: aquamarine;
+    width: 100px;
+    height: 100px;
 }
