@@ -20,8 +20,12 @@
             <label for="surname">Surname:</label>
             <input id="surname" type="surname" placeholder="surname" required><br>
         </form>
-        <button onclick="addItem()">Add client</button>
-        <button onclick="getItems()">get</button>
+        <button onclick="addItem()">Add client</button><br>
+        <button onclick="getItems()">get</button><br>
+        <h3>CLIENTS:</h3>
+        
+        <ul id="clients">
+        </ul>
     </div>
     </div>
 </body>
@@ -45,11 +49,13 @@
     openRequest.onsuccess = function (e) {
         console.log('running onsuccess');
         db = e.target.result;
+        getItems();
     };
     openRequest.onerror = function (e) {
         console.log('onerror! doesnt work');
         console.dir(e);
     };
+   
 
     function addItem() {
         let email = document.getElementById('email').value;
@@ -73,24 +79,42 @@
         const tx = db.transaction("myDatabaseStore", "readwrite");
         const store = tx.objectStore('myDatabaseStore');
         request = store.openCursor();
+        const items = [];
 
         request.onerror = function (event) {
             console.err("error fetching data");
         };
+
+
 
         request.onsuccess = function (event) {
             let cursor = event.target.result;
             if (cursor) {
                 let key = cursor.primaryKey;
                 let value = cursor.value;
-                console.log(key, value);
+                items.push(value)
                 cursor.continue();
             }
-            else {
-                // no more results
-            }
+            updateList(items);
         }
     };
+
+    function updateList(newItems) {
+        var list = document.getElementById('clients');
+        list.replaceChildren([]);
+        for (var i = 0; i < newItems.length; i++) {
+            var element = document.createElement('li');
+            var elContent = document.createElement('div');
+            var delBut = document.createElement('button');
+            element.id = 
+            delBut.innerHTML = 'delete';
+            console.log(newItems[i].email )
+            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].name + ', ' + newItems[i].surname + '  ' ;
+            elContent.appendChild(delBut)
+            element.appendChild(elContent);
+            list.appendChild(element);
+        }
+    }
 
 </script>
 
