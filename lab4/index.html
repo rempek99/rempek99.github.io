@@ -20,7 +20,7 @@
             <label for="surname">Surname:</label>
             <input id="surname" type="surname" placeholder="surname" required><br>
         </form>
-        <button onclick="addItem">Add client</button>
+        <button onclick="addItem()">Add client</button>
     </div>
     </div>
 </body>
@@ -33,12 +33,12 @@
 
     let db;
 
-    const openRequest = indexedDB.open('myDatabase', 1);
+    const openRequest = indexedDB.open('myDatabase', 2);
 
     openRequest.onupgradeneeded = function (e) {
         db = e.target.result;
         console.log('running onupgradeneeded');
-        const storeOS = db.createObjectStore('myDatabaseStore', { keyPath: "name" });
+        const storeOS = db.createObjectStore('myDatabaseStore', { keyPath: "email" });
 
     };
     openRequest.onsuccess = function (e) {
@@ -51,7 +51,21 @@
     };
 
     function addItem() {
-
+        let email = document.getElementById('email').value;
+        let name = document.getElementById('name').value;
+        let surname = document.getElementById('surname').value;
+        // console.log(email);
+        // console.log(name);
+        // console.log(surname);
+        const item = {
+            email: email,
+            name: name,
+            surname: surname
+        };
+        console.log(item)
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        store.add(item);
     }
 
 </script>
