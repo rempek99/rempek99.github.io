@@ -21,6 +21,7 @@
             <input id="surname" type="surname" placeholder="surname" required><br>
         </form>
         <button onclick="addItem()">Add client</button>
+        <button onclick="getItems()">get</button>
     </div>
     </div>
 </body>
@@ -66,7 +67,30 @@
         const tx = db.transaction("myDatabaseStore", "readwrite");
         const store = tx.objectStore('myDatabaseStore');
         store.add(item);
-    }
+    };
+
+    function getItems() {
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        request = store.openCursor();
+
+        request.onerror = function (event) {
+            console.err("error fetching data");
+        };
+
+        request.onsuccess = function (event) {
+            let cursor = event.target.result;
+            if (cursor) {
+                let key = cursor.primaryKey;
+                let value = cursor.value;
+                console.log(key, value);
+                cursor.continue();
+            }
+            else {
+                // no more results
+            }
+        }
+    };
 
 </script>
 
