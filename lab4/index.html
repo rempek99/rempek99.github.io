@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
-    <script src="code.js" charset="utf-8"></script>
     <link rel="stylesheet" href="style.css">
     <title>lab4</title>
 </head>
@@ -13,6 +12,15 @@
     <div class="root">
         Arkadiusz Remplewicz 249106
         <h1>Lab4</h1>
+        <form>
+            <label for="email">E-mail:</label>
+            <input id="email" type="email" placeholder="example@mail.com" required><br>
+            <label for="name">Name:</label>
+            <input id="name" type="text" placeholder="name" required><br>
+            <label for="surname">Surname:</label>
+            <input id="surname" type="surname" placeholder="surname" required><br>
+        </form>
+        <button onclick="addItem">Add client</button>
     </div>
     </div>
 </body>
@@ -23,6 +31,28 @@
         console.log("This browser doesn't support IndexedDB");
     }
 
+    let db;
+
+    const openRequest = indexedDB.open('myDatabase', 1);
+
+    openRequest.onupgradeneeded = function (e) {
+        db = e.target.result;
+        console.log('running onupgradeneeded');
+        const storeOS = db.createObjectStore('myDatabaseStore', { keyPath: "name" });
+
+    };
+    openRequest.onsuccess = function (e) {
+        console.log('running onsuccess');
+        db = e.target.result;
+    };
+    openRequest.onerror = function (e) {
+        console.log('onerror! doesnt work');
+        console.dir(e);
+    };
+
+    function addItem() {
+
+    }
 
 </script>
 
