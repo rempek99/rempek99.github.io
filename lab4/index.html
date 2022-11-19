@@ -23,7 +23,7 @@
         <button onclick="addItem()">Add client</button><br>
         <button onclick="getItems()">get</button><br>
         <h3>CLIENTS:</h3>
-        
+
         <ul id="clients">
         </ul>
     </div>
@@ -55,24 +55,21 @@
         console.log('onerror! doesnt work');
         console.dir(e);
     };
-   
+
 
     function addItem() {
         let email = document.getElementById('email').value;
         let name = document.getElementById('name').value;
         let surname = document.getElementById('surname').value;
-        // console.log(email);
-        // console.log(name);
-        // console.log(surname);
         const item = {
             email: email,
             name: name,
             surname: surname
         };
-        console.log(item)
         const tx = db.transaction("myDatabaseStore", "readwrite");
         const store = tx.objectStore('myDatabaseStore');
         store.add(item);
+        getItems();
     };
 
     function getItems() {
@@ -106,14 +103,22 @@
             var element = document.createElement('li');
             var elContent = document.createElement('div');
             var delBut = document.createElement('button');
-            element.id = 
+            const key = newItems[i].email;
+            delBut.addEventListener("click", () => { deleteItem(key); });
             delBut.innerHTML = 'delete';
-            console.log(newItems[i].email )
-            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].name + ', ' + newItems[i].surname + '  ' ;
+            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].name + ', ' + newItems[i].surname + '  ';
             elContent.appendChild(delBut)
             element.appendChild(elContent);
             list.appendChild(element);
+
         }
+    }
+
+    function deleteItem(key) {
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        store.delete(key);
+        getItems();
     }
 
 </script>
