@@ -134,16 +134,54 @@
     var counter = 0;
 
     function randomData() {
-        const random_data = 
+        const random_data = [
+            [
+                { key: '#email', value: '224413@edu.p.lodz.pl' },
+                { key: '#postal', value: '12-213' },
+                { key: '#nip', value: '0987654321' },
+                { key: '#identity', value: 'XXX123123' },
+                { key: '#www', value: 'http://www.google.com' },
+                { key: '#telephone', value: '123123123' },
+                { key: '#birth-date', value: '1999-02-11' }],
+            [
+                { key: '#email', value: 'jacex@wp.pl' },
+                { key: '#postal', value: '09-213' },
+                { key: '#nip', value: '1237123321' },
+                { key: '#identity', value: 'QWE123193' },
+                { key: '#www', value: 'http://www.yahoo.com' },
+                { key: '#telephone', value: '999123123' },
+                { key: '#birth-date', value: '1972-11-11' }],
+            [
+                { key: '#email', value: 'iwona@o2.eu' },
+                { key: '#postal', value: '91-413' },
+                { key: '#nip', value: '5557123999' },
+                { key: '#identity', value: 'QWE666693' },
+                { key: '#www', value: 'http://www.xdddddd.com' },
+                { key: '#telephone', value: '001123000' },
+                { key: '#birth-date', value: '1995-01-20' }],
 
-    document.querySelector('#email').value = "224413@edu.p.lodz.pl"
-    document.querySelector('#postal').value = "11-213"
-    document.querySelector('#nip').value = "0987654321"
-    document.querySelector('#identity').value = "XXX321333"
-    document.querySelector('#www').value = "http://www.google.com"
-    document.querySelector('#telephone').value= "421512532";
-    document.querySelector('#birth-date').value= "1999-02-11";
-}
+        ]
+        console.log(counter)
+        for (i = 0; i < random_data[counter].length; i++) {
+            element = random_data[counter][i];
+            document.querySelector(element.key).value = element.value;
+        }
+        counter++;
+        if (counter >= random_data.length) {
+            counter = 0;
+        }
+        // random_data[0].array.forEach(element => {
+        //     document.querySelector(element.key).value = element.value;
+        // });
+
+        // document.querySelector('#email').value = "224413@edu.p.lodz.pl"
+        // document.querySelector('#postal').value = "11-213"
+        // document.querySelector('#nip').value = "0987654321"
+        // document.querySelector('#identity').value = "XXX321333"
+        // document.querySelector('#www').value = "http://www.google.com"
+        // document.querySelector('#telephone').value= "421512532";
+        // document.querySelector('#birth-date').value= "1999-02-11";
+    }
 
 </script>
 
