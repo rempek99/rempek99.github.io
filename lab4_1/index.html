@@ -12,7 +12,7 @@
     <div class="root">
         Arkadiusz Remplewicz 249106
         <h1>Lab4_1</h1>
-        <form>
+        <form onSubmit="validate()">
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
             <label for="postal">Postal code:</label>
@@ -28,11 +28,10 @@
             <p>-------</p>
             <label for="birth-date">Birth date:</label>
             <input type="date" id="birth-date" name="birth-date" required><br>
+            <button onclick="addItem()" type="submit">Add client</button><br>
+            <button onclick="randomData()" type="submit">Random</button>
+            <button onclick="updateItem()" type="submit">update item</button><br>
         </form>
-        <button onclick="addItem()">Add client</button><br>
-        <button onclick="randomData()">Random</button>
-        <button onclick="getItems()">get</button><br>
-        <button onclick="updateItem()">update item</button><br>
         <h3>CLIENTS:</h3>
 
         <ul id="clients">
@@ -69,6 +68,10 @@
 
 
     function addItem() {
+        if (!validate()) {
+            return;
+        }
+
         let email = document.getElementById('email').value;
         let postal = document.getElementById('postal').value;
         let nip = document.getElementById('nip').value;
@@ -218,6 +221,31 @@
         if (counter >= random_data.length) {
             counter = 0;
         }
+    }
+
+    function validate() {
+        if (!document.getElementById('email').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('postal').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('nip').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('identity').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('www').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('telephone').checkValidity()) {
+            return false;
+        }
+        if (!document.getElementById('birth-date').checkValidity()) {
+            return false;
+        }
+        return true;
     }
 
 </script>
