@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="style.css">
+    <title>lab4</title>
+</head>
+
+<body>
+    <div class="root">
+        Arkadiusz Remplewicz 249106
+        <h1>Lab4</h1>
+        <form>
+            <label for="email">E-mail:</label>
+            <input id="email" type="email" placeholder="example@mail.com" required><br>
+            <label for="name">Name:</label>
+            <input id="name" type="text" placeholder="name" required><br>
+            <label for="surname">Surname:</label>
+            <input id="surname" type="surname" placeholder="surname" required><br>
+        </form>
+        <button onclick="addItem()">Add client</button><br>
+        <button onclick="getItems()">get</button><br>
+        <h3>CLIENTS:</h3>
+
+        <ul id="clients">
+        </ul>
+    </div>
+    </div>
+</body>
+
+<script>
+    // (for debugging) check if browser support indexed db 
+    if (!('indexedDB' in window)) {
+        console.log("This browser doesn't support IndexedDB");
+    }
+
+    let db;
+
+    const openRequest = indexedDB.open('myDatabase', 2);
+
+    openRequest.onupgradeneeded = function (e) {
+        db = e.target.result;
+        console.log('running onupgradeneeded');
+        const storeOS = db.createObjectStore('myDatabaseStore', { keyPath: "email" });
+
+    };
+    openRequest.onsuccess = function (e) {
+        console.log('running onsuccess');
+        db = e.target.result;
+        getItems();
+    };
+    openRequest.onerror = function (e) {
+        console.log('onerror! doesnt work');
+        console.dir(e);
+    };
+
+
+    function addItem() {
+        let email = document.getElementById('email').value;
+        let name = document.getElementById('name').value;
+        let surname = document.getElementById('surname').value;
+        const item = {
+            email: email,
+            name: name,
+            surname: surname
+        };
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        store.add(item);
+        getItems();
+    };
+
+    function getItems() {
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        request = store.openCursor();
+        const items = [];
+
+        request.onerror = function (event) {
+            console.err("error fetching data");
+        };
+
+
+
+        request.onsuccess = function (event) {
+            let cursor = event.target.result;
+            if (cursor) {
+                let key = cursor.primaryKey;
+                let value = cursor.value;
+                items.push(value)
+                cursor.continue();
+            }
+            updateList(items);
+        }
+    };
+
+    function updateList(newItems) {
+        var list = document.getElementById('clients');
+        list.replaceChildren([]);
+        for (var i = 0; i < newItems.length; i++) {
+            var element = document.createElement('li');
+            var elContent = document.createElement('div');
+            var delBut = document.createElement('button');
+            const key = newItems[i].email;
+            delBut.addEventListener("click", () => { deleteItem(key); });
+            delBut.innerHTML = 'delete';
+            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].name + ', ' + newItems[i].surname + '  ';
+            elContent.appendChild(delBut)
+            element.appendChild(elContent);
+            list.appendChild(element);
+
+        }
+    }
+
+    function deleteItem(key) {
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        store.delete(key);
+        getItems();
+    }
+
+</script>
+
+</html>
+<!-- Proszę przygotować aplikację wykorzystującą IndexedDB do zarządzania
+bazą klientów/kontrahentów. -->
