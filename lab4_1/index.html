@@ -12,6 +12,13 @@
     <div class="root">
         Arkadiusz Remplewicz 249106
         <h1>Lab4_1</h1>
+        <p>Wypełnij listę i kliknij 'Add Client', aby dodać klienta do bazy.</p>
+        <p>Aby edytować dane klienta, kliknij 'copy to form' przy elemencie klienta, wypełni to formularz jego danymi.
+        </p>
+        <p>Zmień wybrane dane i kliknij 'Update item', aby zatwierdzić zmiany.</p>
+        <p>Email nie może być edytowany.</p>
+        <p>Aby usunąc klienta z bazy kliknij 'delete' przy elemencie klienta.</p>
+        <p>Naciśnij 'Random', aby wypełnić formularz losowymi danymi.</p>
         <form onSubmit="validate()">
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
@@ -25,13 +32,12 @@
             <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
             <label for="telephone">Phone Number:</label>
             <input id="telephone" placeholder="123456789" type="tel" required><br>
-            <p>-------</p>
             <label for="birth-date">Birth date:</label>
             <input type="date" id="birth-date" name="birth-date" required><br>
             <button onclick="addItem()" type="submit">Add client</button><br>
-            <button onclick="randomData()" type="submit">Random</button>
-            <button onclick="updateItem()" type="submit">update item</button><br>
         </form>
+        <button onclick="updateItem()" type="submit">Update item</button><br>
+        <button onclick="randomData()" type="submit">Random</button><br>
         <h3>CLIENTS:</h3>
 
         <ul id="clients">
@@ -103,7 +109,10 @@
         request.onsuccess = () => {
 
             const item = request.result;
-
+            if (item == null) {
+                alert(`${email} not found, not updated!`);
+                return;
+            }
             let postal = document.getElementById('postal').value;
             let nip = document.getElementById('nip').value;
             let idnum = document.getElementById('identity').value;
@@ -124,9 +133,8 @@
             updateRequest.onsuccess = () => {
 
                 alert(`${email} updated!`);
-
+                getItems();
             }
-            getItems();
         }
     };
 
@@ -163,12 +171,16 @@
             var element = document.createElement('li');
             var elContent = document.createElement('div');
             var delBut = document.createElement('button');
+            var copyBut = document.createElement('button');
             const key = newItems[i].email;
             delBut.addEventListener("click", () => { deleteItem(key); });
+            copyBut.addEventListener("click", () => { copyDataFromItem(key); });
             delBut.innerHTML = 'delete';
+            copyBut.innerHTML = 'copy to form'
             elContent.innerHTML = newItems[i].email + ', ' + newItems[i].postal + ', ' + newItems[i].nip + ', ' +
                 newItems[i].idnum + ', ' + newItems[i].www + ', ' + newItems[i].telephone + ', ' + newItems[i].birthdate + '  ';
-            elContent.appendChild(delBut)
+            elContent.appendChild(delBut);
+            elContent.appendChild(copyBut);
             element.appendChild(elContent);
             list.appendChild(element);
 
@@ -181,6 +193,24 @@
         store.delete(key);
         getItems();
         alert(`${key} deleted from database!`);
+    }
+
+    function copyDataFromItem(key) {
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        const request = store.get(key);
+        request.onsuccess = () => {
+            const item = request.result;
+            document.getElementById('email').value = item.email;
+            document.getElementById('postal').value = item.postal;
+            document.getElementById('nip').value = item.nip;
+            document.getElementById('identity').value = item.idnum;
+            document.getElementById('www').value = item.www;
+            document.getElementById('telephone').value = item.telephone;
+            document.getElementById('birth-date').value = item.birthdate;
+
+        }
+
     }
 
     var counter = 0;
