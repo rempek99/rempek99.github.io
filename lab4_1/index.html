@@ -69,13 +69,22 @@
 
     function addItem() {
         let email = document.getElementById('email').value;
-        let name = document.getElementById('name').value;
-        let surname = document.getElementById('surname').value;
+        let postal = document.getElementById('postal').value;
+        let nip = document.getElementById('nip').value;
+        let idnum = document.getElementById('identity').value;
+        let www = document.getElementById('www').value;
+        let telephone = document.getElementById('telephone').value;
+        let birthdate = document.getElementById('birth-date').value;
         const item = {
             email: email,
-            name: name,
-            surname: surname
+            postal: postal,
+            nip: nip,
+            idnum: idnum,
+            www: www,
+            telephone: telephone,
+            birthdate: birthdate
         };
+        console.log(item);
         const tx = db.transaction("myDatabaseStore", "readwrite");
         const store = tx.objectStore('myDatabaseStore');
         store.add(item);
@@ -116,7 +125,8 @@
             const key = newItems[i].email;
             delBut.addEventListener("click", () => { deleteItem(key); });
             delBut.innerHTML = 'delete';
-            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].name + ', ' + newItems[i].surname + '  ';
+            elContent.innerHTML = newItems[i].email + ', ' + newItems[i].postal + ', ' + newItems[i].nip + ', ' +
+                newItems[i].idnum + ', ' + newItems[i].www + ', ' + newItems[i].telephone + ', ' + newItems[i].birthdate + '  ';
             elContent.appendChild(delBut)
             element.appendChild(elContent);
             list.appendChild(element);
@@ -170,21 +180,10 @@
         if (counter >= random_data.length) {
             counter = 0;
         }
-        // random_data[0].array.forEach(element => {
-        //     document.querySelector(element.key).value = element.value;
-        // });
-
-        // document.querySelector('#email').value = "224413@edu.p.lodz.pl"
-        // document.querySelector('#postal').value = "11-213"
-        // document.querySelector('#nip').value = "0987654321"
-        // document.querySelector('#identity').value = "XXX321333"
-        // document.querySelector('#www').value = "http://www.google.com"
-        // document.querySelector('#telephone').value= "421512532";
-        // document.querySelector('#birth-date').value= "1999-02-11";
     }
 
 </script>
 
 </html>
-<!-- Proszę przygotować aplikację wykorzystującą IndexedDB do zarządzania
-bazą klientów/kontrahentów. -->
+<!-- To nie są pola z poprzednich zdań. Brak możliwości generowania klientów. Nie ma możliwości wczytywania klientów.
+Mało commitów. -->
