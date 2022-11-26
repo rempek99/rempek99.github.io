@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
     <link rel="stylesheet" href="style.css">
-    <title>lab4</title>
+    <title>lab4_1ab4_1</title>
 </head>
 
 <body>
     <div class="root">
         Arkadiusz Remplewicz 249106
-        <h1>Lab4</h1>
+        <h1>Lab4_1</h1>
         <form>
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
@@ -32,6 +32,7 @@
         <button onclick="addItem()">Add client</button><br>
         <button onclick="randomData()">Random</button>
         <button onclick="getItems()">get</button><br>
+        <button onclick="updateItem()">update item</button><br>
         <h3>CLIENTS:</h3>
 
         <ul id="clients">
@@ -84,12 +85,49 @@
             telephone: telephone,
             birthdate: birthdate
         };
-        console.log(item);
         const tx = db.transaction("myDatabaseStore", "readwrite");
         const store = tx.objectStore('myDatabaseStore');
         store.add(item);
         getItems();
+        alert(`${email} added to database!`);
     };
+
+    function updateItem() {
+        let email = document.getElementById('email').value;
+        const tx = db.transaction("myDatabaseStore", "readwrite");
+        const store = tx.objectStore('myDatabaseStore');
+        const request = store.get(email);
+        request.onsuccess = () => {
+
+            const item = request.result;
+
+            let postal = document.getElementById('postal').value;
+            let nip = document.getElementById('nip').value;
+            let idnum = document.getElementById('identity').value;
+            let www = document.getElementById('www').value;
+            let telephone = document.getElementById('telephone').value;
+            let birthdate = document.getElementById('birth-date').value;
+            item.postal = postal;
+            item.nip = nip;
+            item.idnum = idnum;
+            item.www = www;
+            item.telephone = telephone;
+            item.birthdate = birthdate;
+
+
+            // Create a request to update
+            const updateRequest = store.put(item);
+
+            updateRequest.onsuccess = () => {
+
+                alert(`${email} updated!`);
+
+            }
+            getItems();
+        }
+    };
+
+
 
     function getItems() {
         const tx = db.transaction("myDatabaseStore", "readwrite");
@@ -139,6 +177,7 @@
         const store = tx.objectStore('myDatabaseStore');
         store.delete(key);
         getItems();
+        alert(`${key} deleted from database!`);
     }
 
     var counter = 0;
@@ -171,7 +210,6 @@
                 { key: '#birth-date', value: '1995-01-20' }],
 
         ]
-        console.log(counter)
         for (i = 0; i < random_data[counter].length; i++) {
             element = random_data[counter][i];
             document.querySelector(element.key).value = element.value;
