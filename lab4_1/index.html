@@ -15,10 +15,19 @@
         <form>
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
-            <label for="name">Name:</label>
-            <input id="name" type="text" placeholder="name" required><br>
-            <label for="surname">Surname:</label>
-            <input id="surname" type="surname" placeholder="surname" required><br>
+            <label for="postal">Postal code:</label>
+            <input id="postal" placeholder="00-000" required pattern="^\d{2}-\d{3}$"><br>
+            <label for="nip">NIP:</label>
+            <input id="nip" placeholder="1234567890" required pattern="\d{10}"><br>
+            <label for="idendity">ID number:</label>
+            <input id="identity" placeholder="ABC123456" required pattern="^\w{3}\d{6}$"><br>
+            <label for="www">WWW:</label>
+            <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
+            <label for="telephone">Phone Number:</label>
+            <input id="telephone" placeholder="123456789" type="tel" required><br>
+            <p>-------</p>
+            <label for="birth-date">Birth date:</label>
+            <input type="date" id="birth-date" name="birth-date" required><br>
         </form>
         <button onclick="addItem()">Add client</button><br>
         <button onclick="getItems()">get</button><br>
