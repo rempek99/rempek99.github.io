@@ -30,6 +30,7 @@
             <input type="date" id="birth-date" name="birth-date" required><br>
         </form>
         <button onclick="addItem()">Add client</button><br>
+        <button onclick="randomData()">Random</button>
         <button onclick="getItems()">get</button><br>
         <h3>CLIENTS:</h3>
 
@@ -129,6 +130,20 @@
         store.delete(key);
         getItems();
     }
+
+    var counter = 0;
+
+    function randomData() {
+        const random_data = 
+
+    document.querySelector('#email').value = "224413@edu.p.lodz.pl"
+    document.querySelector('#postal').value = "11-213"
+    document.querySelector('#nip').value = "0987654321"
+    document.querySelector('#identity').value = "XXX321333"
+    document.querySelector('#www').value = "http://www.google.com"
+    document.querySelector('#telephone').value= "421512532";
+    document.querySelector('#birth-date').value= "1999-02-11";
+}
 
 </script>
 
