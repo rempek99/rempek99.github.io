@@ -232,6 +232,17 @@ function filterClients(e) {
     const searchInput = document.getElementById('filterinput');
     console.log(searchInput)
     console.log('test1')
+
+    const clientsList = document.getElementById('clients');
+    const clientsArray = clientsList.getElementsByTagName('li');
+    
+    for(i=0; i<clientsArray.length; i++) {
+        const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
+        console.log(clientTextRepresntation);
+        if(clientTextRepresntation.includes(asd)){
+            console.log('tak');
+        } 
+    }
 }
 
 function setup() {
@@ -239,5 +250,3 @@ function setup() {
     console.log(searchInput)
     searchInput.addEventListener('change', filterClients);
 }
-// searchInput.addEventListener('change', filterClients);
-
