@@ -230,19 +230,14 @@ function validate() {
 }
 function filterClients(e) {
     const searchInput = document.getElementById('filterinput');
-    console.log(searchInput)
-    console.log('test1')
 
     const clientsList = document.getElementById('clients');
     const clientsArray = clientsList.getElementsByTagName('li');
     
     for(i=0; i<clientsArray.length; i++) {
         const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
-        console.log(clientTextRepresntation);
         const pattern = searchInput.value;
-        console.log(pattern);
         if(clientTextRepresntation.includes(pattern)){
-            console.log('tak');
             clientsArray[i].style.display = 'inline';
         } else{
             clientsArray[i].style.display = 'none';
