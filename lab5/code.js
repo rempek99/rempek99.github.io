@@ -239,14 +239,19 @@ function filterClients(e) {
     for(i=0; i<clientsArray.length; i++) {
         const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
         console.log(clientTextRepresntation);
-        if(clientTextRepresntation.includes(asd)){
+        const pattern = searchInput.value;
+        console.log(pattern);
+        if(clientTextRepresntation.includes(pattern)){
             console.log('tak');
-        } 
+            clientsArray[i].style.display = 'inline';
+        } else{
+            clientsArray[i].style.display = 'none';
+        }
     }
 }
 
 function setup() {
-    const searchInput = document.getElementById('filterinput');
-    console.log(searchInput)
-    searchInput.addEventListener('change', filterClients);
+    // const searchInput = document.getElementById('filterinput');
+    // console.log(searchInput)
+    // searchInput.addEventListener('change', filterClients);
 }
