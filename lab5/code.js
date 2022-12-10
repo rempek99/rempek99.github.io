@@ -228,15 +228,16 @@ function validate() {
     }
     return true;
 }
-function filterClients() {
-    console.log('test1')
+function filterClients(e) {
     const searchInput = document.getElementById('filterinput');
     console.log(searchInput)
+    console.log('test1')
 }
 
 function setup() {
-const searchInput = document.getElementById('filterinput');
-console.log(searchInput)
+    const searchInput = document.getElementById('filterinput');
+    console.log(searchInput)
+    searchInput.addEventListener('change', filterClients);
 }
 // searchInput.addEventListener('change', filterClients);
 
