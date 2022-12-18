@@ -66,7 +66,7 @@ function updateItem() {
 
         const item = request.result;
         if (item == null) {
-            alert(`${email} not found, not updated!`);
+            alert(`${email}, ten adres email nie jest przypisany do żadnego klienta!`);
             return;
         }
         let postal = document.getElementById('postal').value;
@@ -87,8 +87,6 @@ function updateItem() {
         const updateRequest = store.put(item);
 
         updateRequest.onsuccess = () => {
-
-            alert(`${email} updated!`);
             getItems();
         }
     }
@@ -131,8 +129,8 @@ function updateList(newItems) {
         const key = newItems[i].email;
         delBut.addEventListener("click", () => { deleteItem(key); });
         copyBut.addEventListener("click", () => { copyDataFromItem(key); });
-        delBut.innerHTML = 'delete';
-        copyBut.innerHTML = 'copy to form'
+        delBut.innerHTML = 'Usuń';
+        copyBut.innerHTML = 'Edytuj'
         elContent.innerHTML = newItems[i].email + ', ' + newItems[i].postal + ', ' + newItems[i].nip + ', ' +
             newItems[i].idnum + ', ' + newItems[i].www + ', ' + newItems[i].telephone + ', ' + newItems[i].birthdate + '  ';
         elContent.appendChild(delBut);
@@ -252,6 +250,5 @@ function filterClients(e) {
 
 window.onload = function() {
     const searchInput = document.getElementById('filterinput');
-    console.log(searchInput)
     searchInput.addEventListener('change', filterClients);
 }
