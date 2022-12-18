@@ -20,7 +20,7 @@
         <p>Email nie może być edytowany.</p>
         <p>Aby usunąc klienta z bazy kliknij 'delete' przy elemencie klienta.</p>
         <p>Naciśnij 'Random', aby wypełnić formularz losowymi danymi.</p>
-        <form onSubmit="validate()">
+        <form>
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
             <label for="postal">Postal code:</label>
@@ -35,10 +35,10 @@
             <input id="telephone" placeholder="123456789" type="tel" required><br>
             <label for="birth-date">Birth date:</label>
             <input type="date" id="birth-date" name="birth-date" required><br>
-            <button onclick="addItem()" type="submit">Add client</button><br>
+            <button onclick="addItem()" type="button">Add client</button><br>
         </form>
-        <button onclick="updateItem()" type="submit">Update item</button><br>
-        <button onclick="randomData()" type="submit">Random</button><br>
+        <button onclick="updateItem()" type="button">Update item</button><br>
+        <button onclick="randomData()" type="button">Random</button><br>
         <br>
         <br>
         <label for="search">Search client:</label>
