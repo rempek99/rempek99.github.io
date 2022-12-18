@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js" charset="utf-8"></script>
+    <title>lab6</title>
+</head>
+
+<body onload="setup()">
+    <div class="root">
+        Arkadiusz Remplewicz 249106
+        <h1>Lab6</h1>
+        <p>Wypełnij listę i kliknij 'Add Client', aby dodać klienta do bazy.</p>
+        <p>Aby edytować dane klienta, kliknij 'copy to form' przy elemencie klienta, wypełni to formularz jego danymi.
+        </p>
+        <p>Zmień wybrane dane i kliknij 'Update item', aby zatwierdzić zmiany.</p>
+        <p>Email nie może być edytowany.</p>
+        <p>Aby usunąc klienta z bazy kliknij 'delete' przy elemencie klienta.</p>
+        <p>Naciśnij 'Random', aby wypełnić formularz losowymi danymi.</p>
+        <form onSubmit="validate()">
+            <label for="email">E-mail:</label>
+            <input id="email" type="email" placeholder="example@mail.com" required><br>
+            <label for="postal">Postal code:</label>
+            <input id="postal" placeholder="00-000" required pattern="^\d{2}-\d{3}$"><br>
+            <label for="nip">NIP:</label>
+            <input id="nip" placeholder="1234567890" required pattern="\d{10}"><br>
+            <label for="idendity">ID number:</label>
+            <input id="identity" placeholder="ABC123456" required pattern="^\w{3}\d{6}$"><br>
+            <label for="www">WWW:</label>
+            <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
+            <label for="telephone">Phone Number:</label>
+            <input id="telephone" placeholder="123456789" type="tel" required><br>
+            <label for="birth-date">Birth date:</label>
+            <input type="date" id="birth-date" name="birth-date" required><br>
+            <button onclick="addItem()" type="submit">Add client</button><br>
+        </form>
+        <button onclick="updateItem()" type="submit">Update item</button><br>
+        <button onclick="randomData()" type="submit">Random</button><br>
+        <br>
+        <br>
+        <label for="search">Search client:</label>
+        <input id="filterinput" type="text"><br>
+        <button onclick="filterClients()">filter</button>
+            
+        <h3>CLIENTS:</h3>
+
+        <ul id="clients">
+        </ul>
+    </div>
+    </div>
+</body>
+
+<script>
+   
+
+</script>
+
+</html>
+<!-- Do opracowanej aplikacji proszę dodać:
+brakujące pola
+możliwość wygodnego (nie poprzez wpisywanie id) kasowania i edycji rekordów
+możliwość wyszukiwania/filtrowania wyników -->
