@@ -283,13 +283,13 @@ function filterClients(e) {
                 if (field == 'all') {
                     const itemString = item.email + ', ' + item.postal + ', ' + item.nip + ', ' +
                         item.idnum + ', ' + item.www + ', ' + item.telephone + ', ' + item.birthdate + '  ';
-                    if (!itemString.includes(pattern)) {
+                    if (!itemString.toLocaleLowerCase().includes(pattern.toLocaleLowerCase())) {
                         const index = items.indexOf(item);
                         items.splice(index, 1);
                     }
                 } else {
                     const value = item[field];
-                    if (!value.includes(pattern)) {
+                    if (!value.toLocaleLowerCase().includes(pattern.toLocaleLowerCase())) {
                         const index = items.indexOf(item);
                         items.splice(index, 1);
                     }
