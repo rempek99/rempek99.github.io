@@ -11,17 +11,18 @@ const openRequest = indexedDB.open('myDatabase', 2);
 
 openRequest.onupgradeneeded = function (e) {
     db = e.target.result;
-    console.log('running onupgradeneeded');
+    console.log('Inicjalizacja indexedDb...');
     const storeOS = db.createObjectStore('myDatabaseStore', { keyPath: "email" });
 
 };
 openRequest.onsuccess = function (e) {
-    console.log('running onsuccess');
+    console.log('Połączono z indexedDB...');
     db = e.target.result;
     fetchClients();
 };
 openRequest.onerror = function (e) {
-    console.log('onerror! doesnt work');
+    alert('Brak połączenia z bazą danych. Aplikacja może nie działać poprawnie w sesji prywatnej przeglądarki.')
+    console.log('Połączenie z bazą danych nie mogło zostać otwarte. (Aplikacja może nie działać poprawnie w sesji prywatnej przeglądarki Firefox)');
     console.dir(e);
 };
 
@@ -99,7 +100,7 @@ function getClients() {
     const items = [];
 
     request.onerror = function (event) {
-        console.err("error fetching data");
+        console.err("Błąd wczytywania klientów.");
         return null;
     };
 
@@ -125,7 +126,7 @@ function fetchClients() {
     const items = [];
 
     request.onerror = function (event) {
-        console.err("error fetching data");
+        console.err("Błąd wczytywania klientów.");
     };
 
 
@@ -161,7 +162,6 @@ function updateList(newItems) {
         elContent.appendChild(copyBut);
         element.appendChild(elContent);
         list.appendChild(element);
-
     }
 }
 
@@ -170,7 +170,7 @@ function deleteItem(key) {
     const store = tx.objectStore('myDatabaseStore');
     store.delete(key);
     fetchClients();
-    alert(`${key} deleted from database!`);
+    alert(`${key}, został usunięty!`);
 }
 
 function copyDataFromItem(key) {
