@@ -256,10 +256,10 @@ function validate() {
     return true;
 }
 function filterClients(e) {
+    console.log('pressed')
     const searchInput = document.getElementById('filterinput');
     const field = document.getElementById('fields').value;
     const pattern = searchInput.value;
-    console.log(field)
 
     const tx = db.transaction("myDatabaseStore", "readwrite");
     const store = tx.objectStore('myDatabaseStore');
@@ -298,29 +298,11 @@ function filterClients(e) {
         }
         updateList(items);
     }
-
-
-
-
-
-
-    // const clientsList = document.getElementById('clients');
-    // const clientsArray = clientsList.getElementsByTagName('li');
-
-    // for(i=0; i<clientsArray.length; i++) {
-    //     const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
-    //     const pattern = searchInput.value;
-    //     if(clientTextRepresntation.includes(pattern)){
-    //         clientsArray[i].style.display = 'inline';
-    //     } else{
-    //         clientsArray[i].style.display = 'none';
-    //     }
-    // }
 }
 
 window.onload = function () {
     const searchInput = document.getElementById('filterinput');
     const combo = document.getElementById('fields');
-    searchInput.addEventListener('change', filterClients);
+    searchInput.addEventListener('keyup', filterClients);
     combo.addEventListener('change', filterClients);
 }
