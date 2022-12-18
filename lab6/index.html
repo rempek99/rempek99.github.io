@@ -9,7 +9,7 @@
     <title>lab6</title>
 </head>
 
-<body onload="setup()">
+<body>
     <div class="root">
         Arkadiusz Remplewicz 249106
         <h1>Lab6</h1>
@@ -42,8 +42,8 @@
         <br>
         <br>
         <label for="search">Search client:</label>
-        <input id="filterinput" type="text"><br>
-        <button onclick="filterClients()">filter</button>
+        <input id="filterinput" ><br>
+        <!-- <button onclick="filterClients()">filter</button> -->
             
         <h3>CLIENTS:</h3>
 
@@ -59,7 +59,15 @@
 </script>
 
 </html>
-<!-- Do opracowanej aplikacji proszę dodać:
-brakujące pola
-możliwość wygodnego (nie poprzez wpisywanie id) kasowania i edycji rekordów
-możliwość wyszukiwania/filtrowania wyników -->
+<!--
+TODO    
+
+[X] sprawdzanie poprawności wpisanych danych dla wszystkich pól
+[ ] filtrowanie przy wpisywaniu (NIE po naciśnięciu guzika)
+[ ] filtrowanie po kilku polach
+[ ] możliwość wyszukiwania/filtrowania wyników
+[ ] brak wyświetlania alertu po dodaniu wpisu do bazy 
+[ ] możliwość edycji (BEZ korzystania z id)
+[ ] dodawanie nowych rekordów ma się odbywać BEZ przeładowania strony i/lub naciśnięcia dodatkowego guzika "odświeżającego tabelę".
+
+-->

@@ -247,8 +247,8 @@ function filterClients(e) {
     }
 }
 
-function setup() {
-    // const searchInput = document.getElementById('filterinput');
-    // console.log(searchInput)
-    // searchInput.addEventListener('change', filterClients);
+window.onload = function() {
+    const searchInput = document.getElementById('filterinput');
+    console.log(searchInput)
+    searchInput.addEventListener('change', filterClients);
 }
