@@ -18,7 +18,7 @@ openRequest.onupgradeneeded = function (e) {
 openRequest.onsuccess = function (e) {
     console.log('running onsuccess');
     db = e.target.result;
-    getItems();
+    fetchClients();
 };
 openRequest.onerror = function (e) {
     console.log('onerror! doesnt work');
@@ -54,7 +54,7 @@ function addItem() {
     request.onerror = (e) => {
         alert('Nie można dodać klienta. (Klient o podanym adresie email już isnieje)')
     }
-    getItems();
+    fetchClients();
 };
 
 function updateItem() {
@@ -87,14 +87,38 @@ function updateItem() {
         const updateRequest = store.put(item);
 
         updateRequest.onsuccess = () => {
-            getItems();
+            fetchClients();
         }
     }
 };
 
+function getClients() {
+    const tx = db.transaction("myDatabaseStore", "readwrite");
+    const store = tx.objectStore('myDatabaseStore');
+    request = store.openCursor();
+    const items = [];
+
+    request.onerror = function (event) {
+        console.err("error fetching data");
+        return null;
+    };
 
 
-function getItems() {
+
+    request.onsuccess = function (event) {
+        let cursor = event.target.result;
+        if (cursor) {
+            let key = cursor.primaryKey;
+            let value = cursor.value;
+            items.push(value)
+            cursor.continue();
+        }
+        return items;
+    }
+}
+
+
+function fetchClients() {
     const tx = db.transaction("myDatabaseStore", "readwrite");
     const store = tx.objectStore('myDatabaseStore');
     request = store.openCursor();
@@ -145,7 +169,7 @@ function deleteItem(key) {
     const tx = db.transaction("myDatabaseStore", "readwrite");
     const store = tx.objectStore('myDatabaseStore');
     store.delete(key);
-    getItems();
+    fetchClients();
     alert(`${key} deleted from database!`);
 }
 
@@ -233,22 +257,70 @@ function validate() {
 }
 function filterClients(e) {
     const searchInput = document.getElementById('filterinput');
+    const field = document.getElementById('fields').value;
+    const pattern = searchInput.value;
+    console.log(field)
 
-    const clientsList = document.getElementById('clients');
-    const clientsArray = clientsList.getElementsByTagName('li');
-    
-    for(i=0; i<clientsArray.length; i++) {
-        const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
-        const pattern = searchInput.value;
-        if(clientTextRepresntation.includes(pattern)){
-            clientsArray[i].style.display = 'inline';
-        } else{
-            clientsArray[i].style.display = 'none';
+    const tx = db.transaction("myDatabaseStore", "readwrite");
+    const store = tx.objectStore('myDatabaseStore');
+    request = store.openCursor();
+    const items = [];
+
+    request.onerror = function (event) {
+        console.err("error fetching data");
+    };
+
+
+
+    request.onsuccess = function (event) {
+        let cursor = event.target.result;
+        if (cursor) {
+            let key = cursor.primaryKey;
+            let value = cursor.value;
+            items.push(value)
+            cursor.continue();
+            items.forEach(item => {
+                if (field == 'all') {
+                    const itemString = item.email + ', ' + item.postal + ', ' + item.nip + ', ' +
+                        item.idnum + ', ' + item.www + ', ' + item.telephone + ', ' + item.birthdate + '  ';
+                    if (!itemString.includes(pattern)) {
+                        const index = items.indexOf(item);
+                        items.splice(index, 1);
+                    }
+                } else {
+                    const value = item[field];
+                    if (!value.includes(pattern)) {
+                        const index = items.indexOf(item);
+                        items.splice(index, 1);
+                    }
+                }
+            })
         }
+        updateList(items);
     }
+
+
+
+
+
+
+    // const clientsList = document.getElementById('clients');
+    // const clientsArray = clientsList.getElementsByTagName('li');
+
+    // for(i=0; i<clientsArray.length; i++) {
+    //     const clientTextRepresntation = clientsArray[i].getElementsByTagName('div')[0].innerText;
+    //     const pattern = searchInput.value;
+    //     if(clientTextRepresntation.includes(pattern)){
+    //         clientsArray[i].style.display = 'inline';
+    //     } else{
+    //         clientsArray[i].style.display = 'none';
+    //     }
+    // }
 }
 
-window.onload = function() {
+window.onload = function () {
     const searchInput = document.getElementById('filterinput');
+    const combo = document.getElementById('fields');
     searchInput.addEventListener('change', filterClients);
+    combo.addEventListener('change', filterClients);
 }
