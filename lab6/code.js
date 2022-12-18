@@ -49,9 +49,12 @@ function addItem() {
     };
     const tx = db.transaction("myDatabaseStore", "readwrite");
     const store = tx.objectStore('myDatabaseStore');
-    store.add(item);
+    const request = store.add(item);
+
+    request.onerror = (e) => {
+        alert('Nie można dodać klienta. (Klient o podanym adresie email już isnieje)')
+    }
     getItems();
-    alert(`${email} added to database!`);
 };
 
 function updateItem() {

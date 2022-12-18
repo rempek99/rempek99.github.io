@@ -23,22 +23,22 @@
         <form>
             <label for="email">E-mail:</label>
             <input id="email" type="email" placeholder="example@mail.com" required><br>
-            <label for="postal">Postal code:</label>
+            <label for="postal">Kod pocztowy:</label>
             <input id="postal" placeholder="00-000" required pattern="^\d{2}-\d{3}$"><br>
             <label for="nip">NIP:</label>
             <input id="nip" placeholder="1234567890" required pattern="\d{10}"><br>
-            <label for="idendity">ID number:</label>
+            <label for="idendity">Numer Dowodu:</label>
             <input id="identity" placeholder="ABC123456" required pattern="^\w{3}\d{6}$"><br>
-            <label for="www">WWW:</label>
+            <label for="www">Strona WWW:</label>
             <input id="www" placeholder="http://example.com" onblur="checkURL(this)" type="url" required><br>
-            <label for="telephone">Phone Number:</label>
+            <label for="telephone">Numer Telefonu:</label>
             <input id="telephone" placeholder="123456789" type="tel" required><br>
-            <label for="birth-date">Birth date:</label>
+            <label for="birth-date">Data Urodzenia:</label>
             <input type="date" id="birth-date" name="birth-date" required><br>
-            <button onclick="addItem()" type="button">Add client</button><br>
+            <button onclick="addItem()" type="button">Dodaj klienta</button><br>
         </form>
-        <button onclick="updateItem()" type="button">Update item</button><br>
-        <button onclick="randomData()" type="button">Random</button><br>
+        <button onclick="updateItem()" type="button">Aktualizuj rekord</button><br>
+        <button onclick="randomData()" type="button">Losuj</button><br>
         <br>
         <br>
         <label for="search">Search client:</label>
@@ -63,10 +63,10 @@
 TODO    
 
 [X] sprawdzanie poprawności wpisanych danych dla wszystkich pól
-[ ] filtrowanie przy wpisywaniu (NIE po naciśnięciu guzika)
+[?] filtrowanie przy wpisywaniu (NIE po naciśnięciu guzika)
 [ ] filtrowanie po kilku polach
-[ ] możliwość wyszukiwania/filtrowania wyników
-[ ] brak wyświetlania alertu po dodaniu wpisu do bazy 
+[X] możliwość wyszukiwania/filtrowania wyników
+[X] brak wyświetlania alertu po dodaniu wpisu do bazy 
 [ ] możliwość edycji (BEZ korzystania z id)
 [ ] dodawanie nowych rekordów ma się odbywać BEZ przeładowania strony i/lub naciśnięcia dodatkowego guzika "odświeżającego tabelę".
 
